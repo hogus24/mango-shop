@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
 import "./MainPage.css";
 import axios from "axios";
 const MainPage = () => {
   let [products, setProducts] = React.useState([]);
-  // 컴포넌트가 랜더 될 때 딱 한번 실행
+  // useEffect -> 컴포넌트가 랜더 될 때 딱 한번 실행
   // useEffect (axios()=>{})
   useState([]);
   useEffect(() => {
@@ -19,13 +18,9 @@ const MainPage = () => {
         return console.log(err);
       });
   }, []);
+
   return (
     <>
-      <div id="header">
-        <div id="header-area">
-          <img src="images/icons/logo.png" alt="logo" />
-        </div>
-      </div>
       <div id="body">
         <div id="banner">
           <img src="images/banners/banner1.png" alt="banner" />
@@ -36,7 +31,7 @@ const MainPage = () => {
             console.log("map에서 반환된 products", products, idx);
             return (
               <div className="product-card" key={idx}>
-                <Link className="product-link" to={`/product/${idx}`}>
+                <Link className="product-link" to={`/product/${product.id}`}>
                   <div>
                     <img className="product-img" src={product.imageUrl} alt="{product.name}" />
                   </div>
@@ -53,13 +48,6 @@ const MainPage = () => {
             );
           })}
         </div>
-      </div>
-      <div id="footer">
-        <a href="#">회사소개</a>
-        <a href="#">이용약관</a>
-        <a href="#">통신판매업:123-1234</a>
-        <a href="#">사업자등록번호:456-4567</a>
-        <a href="#">개인정보...</a>
       </div>
     </>
   );
