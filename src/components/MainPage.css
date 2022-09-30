@@ -47,11 +47,14 @@
 }
 .product-card {
   width: 180px;
-  height: 300px;
   margin-right: 21px;
   margin-bottom: 12px;
   border: 1px solid rgba(230, 230, 230, 1);
   border-radius: 12px;
+}
+.product-link {
+  color: #333;
+  text-decoration: none;
 }
 .product-img {
   width: 100%;
@@ -76,5 +79,5 @@
   margin-top: 12px;
 }
 .product-avatar {
-width: 24px;
+  width: 24px;
 }

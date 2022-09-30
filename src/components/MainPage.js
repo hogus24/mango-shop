@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+
 import "./MainPage.css";
 import axios from "axios";
 const MainPage = () => {
   let [products, setProducts] = React.useState([]);
+  // 컴포넌트가 랜더 될 때 딱 한번 실행
+  // useEffect (axios()=>{})
   useState([]);
   useEffect(() => {
     axios
@@ -29,19 +33,22 @@ const MainPage = () => {
         <h2>Products</h2>
         <div id="product-list">
           {products.map((product, idx) => {
+            console.log("map에서 반환된 products", products, idx);
             return (
               <div className="product-card" key={idx}>
-                <div>
-                  <img className="product-img" src={product.imageUrl} alt="{product.name}" />
-                </div>
-                <div className="product-content">
-                  <span className="product-name">{product.name}</span>
-                  <span className="product-price">{product.price}</span>
-                  <div className="product-seller">
-                    <img className="product-avatar" src="images/icons/avatar.png" alt="avatar" />
-                    <span>{product.seller}</span>
+                <Link className="product-link" to={`/product/${idx}`}>
+                  <div>
+                    <img className="product-img" src={product.imageUrl} alt="{product.name}" />
                   </div>
-                </div>
+                  <div className="product-content">
+                    <span className="product-name">{product.name}</span>
+                    <span className="product-price">{product.price}</span>
+                    <div className="product-seller">
+                      <img className="product-avatar" src="images/icons/avatar.png" alt="avatar" />
+                      <span>{product.seller}</span>
+                    </div>
+                  </div>
+                </Link>
               </div>
             );
           })}
