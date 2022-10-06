@@ -1,3 +1,4 @@
+import { API_URL } from "../config/constants";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./MainPage.css";
@@ -10,10 +11,10 @@ const MainPage = () => {
   let [products, setProducts] = React.useState([]);
   // useEffect -> 컴포넌트가 랜더 될 때 딱 한번 실행
   // useEffect (axios()=>{})
-  useState([]);
+
   useEffect(() => {
     axios
-      .get("http://localhost:8080/products")
+      .get(`${API_URL}/products`)
       .then((res) => {
         products = res.data.product;
         setProducts(products);
