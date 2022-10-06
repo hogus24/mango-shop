@@ -8,14 +8,13 @@ const ProductPage = () => {
   const { id } = useParams();
   // useState(null) -> 괄호안에 [] 를 넣지 않은 이유 = Postman 에 각 상품의 데이터베이스에 배열("[]")을 사용하지 않았기 때문 !
   // useState(null) 앞에 React. 를 작성하지 않은 이유 = import 할때 React 에서 가져온게 아니기 때문 !
-  let [product, setProducts] = useState(null);
+  let [product, setProduct] = useState(null);
   useEffect(() => {
     axios
-      .get(`https://ce52d6e5-08ba-4415-b9cd-d1008f522242.mock.pstmn.io/products/${id}`)
+      .get(`http://localhost:8080/products/${id}`)
       .then((res) => {
-        console.log(res);
-        product = res.data;
-        setProducts(product);
+        product = res.data.product;
+        setProduct(product);
       })
       .catch((err) => {
         return console.log(err);

@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./MainPage.css";
 import axios from "axios";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+dayjs.extend(relativeTime);
+
 const MainPage = () => {
   let [products, setProducts] = React.useState([]);
   // useEffect -> 컴포넌트가 랜더 될 때 딱 한번 실행
@@ -9,9 +13,9 @@ const MainPage = () => {
   useState([]);
   useEffect(() => {
     axios
-      .get("https://ce52d6e5-08ba-4415-b9cd-d1008f522242.mock.pstmn.io/products")
+      .get("http://localhost:8080/products")
       .then((res) => {
-        products = res.data.products;
+        products = res.data.product;
         setProducts(products);
       })
       .catch((err) => {
@@ -38,9 +42,12 @@ const MainPage = () => {
                   <div className="product-content">
                     <span className="product-name">{product.name}</span>
                     <span className="product-price">{product.price}</span>
-                    <div className="product-seller">
-                      <img className="product-avatar" src="images/icons/avatar.png" alt="avatar" />
-                      <span>{product.seller}</span>
+                    <div className="product-footer">
+                      <div className="product-seller">
+                        <img className="product-avatar" src="images/icons/avatar.png" alt="avatar" />
+                        <span>{product.seller}</span>
+                      </div>
+                      <span className="product-date">{dayjs(product.createdAt).fromNow()}</span>
                     </div>
                   </div>
                 </Link>
